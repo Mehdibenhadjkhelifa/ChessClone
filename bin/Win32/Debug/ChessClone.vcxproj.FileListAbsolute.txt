@@ -1,0 +1,1 @@
+C:\programming\CPP\ChessClone\bin\Win32\Debug\ChessClone.exe
