@@ -1,5 +1,1 @@
-﻿  Board.cpp
-C:\programming\CPP\ChessClone\ChessClone\Source\Board.cpp(7,3): error C2065: 'A': undeclared identifier
-C:\programming\CPP\ChessClone\ChessClone\Source\Board.cpp(7,9): error C2065: 'TileNotTakenAndNotInPieceVision': undeclared identifier
-  Piece.cpp
-  Generating Code...
+﻿  ChessClone.vcxproj -> C:\programming\CPP\GitHub\ChessClone\bin\Win32\Debug\ChessClone.exe
