@@ -1,13 +1,12 @@
 #pragma once
-#include "Piece.h"
-
+#include "ChessCore.h"
 
 class Board {
-private:
 
+	
 
 public:
-	TileInfo board[ColumnLength][ColumnLength];
+	TileInfo board[RankLength][FileLength];
 	Board();
 	void BoardInit();
 

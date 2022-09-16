@@ -3,11 +3,14 @@
 #include <iostream>
 #include <glew.h>
 #include <glfw3.h>
-
+#include "Piece.h"
+#include "Rook.cpp"
 #define Width 620
 #define Height 620
 #define COLOR_DarkBrown "(0.28,0.12,0.0,1.0)"
 #define COLOR_LightBrown "(0.6,0.48,0.3,1.0)"
+
+Board ChessBoard;
 
 bool black = true;
 int flipflopcount=0;
@@ -200,6 +203,36 @@ int main(void)
 
         unsigned int BlackShader = CreateShader(VertexShader,BlackFragmentShader);
         unsigned int WhiteShader = CreateShader(VertexShader, WhiteFragmentShader);
+
+
+
+
+
+
+
+
+
+
+        ChessBoard.board[2][3].PieceInTile = new Rook(2, 3, Black);        
+        ChessBoard.board[2][4].PieceInTile = new Rook(2, 4, Black);
+
+        ChessBoard.board[2][5].PieceInTile = new Rook(3, 2, Black);
+
+        std::cout << ChessBoard.board[2][3].tileState << std::endl;
+
+        std::cout << ChessBoard.board[2][4].tileState << std::endl;
+
+        std::cout << ChessBoard.board[2][5].tileState << std::endl;
+
+
+        std::cout << ChessBoard.board[3][2].tileState << std::endl;
+
+
+
+
+
+
+
   
 
     /* Loop until the user closes the window */

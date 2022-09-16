@@ -22,6 +22,7 @@
     <ClCompile Include="Source\Board.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Piece.cpp" />
+    <ClCompile Include="Source\Rook.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Board.h" />

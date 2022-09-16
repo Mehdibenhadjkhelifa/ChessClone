@@ -1,15 +1,16 @@
 #include "Board.h"
-
+#include "ChessCore.h"
 Board::Board() {
 
-	for (int i = 0;i < RawLength;i++)
+	for (int i = 0;i < RankLength;i++)
 	{
-		for (int j = 0;j < ColumnLength;j++) {
+		for (int j = 0;j < FileLength;j++) {
 
 			board[i][j].TileRaw = i;
 			board[i][j].TileColumn = j;
 			board[i][j].PieceInTile = nullptr;
 			board[i][j].tileState = TileNotTakenAndNotInPieceVision;
+			/*board[i][j].PiecesVisionList.reserve(6);*/
 
      	}
 	}
@@ -20,6 +21,6 @@ Board::Board() {
 void Board::BoardInit()
 {
 
-
+	
 
 }
