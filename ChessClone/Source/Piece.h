@@ -6,13 +6,16 @@
 class Piece {
 private:
 
+protected:
+	void PieceInit();
 public:
-	bool Color;
 	int PiecePosX;
 	int PiecePosY;
+	bool Color;
 
 	/*virtual void Move() = 0;*/
 	Piece();
+	/*Piece(int PosX, int PosY, bool color);*/
 
 
 };

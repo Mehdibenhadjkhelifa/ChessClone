@@ -19,15 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Bishop.cpp" />
     <ClCompile Include="Source\Board.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Piece.cpp" />
+    <ClCompile Include="Source\Queen.cpp" />
     <ClCompile Include="Source\Rook.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Bishop.h" />
     <ClInclude Include="Source\Board.h" />
     <ClInclude Include="Source\ChessCore.h" />
     <ClInclude Include="Source\Piece.h" />
+    <ClInclude Include="Source\Rook.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

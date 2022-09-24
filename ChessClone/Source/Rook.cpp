@@ -1,23 +1,24 @@
 #include "Piece.h"
+#include "Rook.h"
+#include <iostream>
 
 extern Board ChessBoard;
 
 
 
-class Rook :public Piece 
-{
-public:
-	Rook(int PosX,int PosY,bool color)
+
+	Rook::Rook(int PosX,int PosY,bool color)
 	{
+		
 		PiecePosX = PosX;
 		PiecePosY = PosY;
 		Color = color;
 		int i(PiecePosX), j(PiecePosY);
-		if (ChessBoard.board[i][j].tileState == TileInPieceVision)
-			ChessBoard.board[i][j].tileState = TileTakenAndInPieceVision;
-		else
-			ChessBoard.board[i][j].tileState = TileTaken;
+		PieceInit();
 		int RightOffset(j+1), LeftOffset(j-1), UpOffset(i+1), DownOffset(i-1);
+	
+		//std::cout << "Test FRom Rook" << std::endl;
+
 
 
 		while (RightOffset<RankLength)
@@ -79,7 +80,7 @@ public:
 
 		}
 
-
+		
 
 
 
@@ -91,7 +92,3 @@ public:
 
 
 	
-
-
-
-};

@@ -1,6 +1,6 @@
 #pragma once
-//#include "Piece.h"
-//#include<vector>
+/*#include "piece.h"
+#include<vector>*/
 #define Black 0
 #define White 1
 enum TileState { TileNotTakenAndNotInPieceVision, TileNotTaken, TileTaken, TileNotInPieceVision, TileInPieceVision , TileTakenAndInPieceVision};
