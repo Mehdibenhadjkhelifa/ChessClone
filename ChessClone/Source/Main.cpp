@@ -7,8 +7,8 @@
 #include "Rook.h"
 #include "Bishop.h"
 //#include "Rook.cpp"
-#define Width 620
-#define Height 620
+#define Width 640
+#define Height 640
 #define COLOR_DarkBrown "(0.28,0.12,0.0,1.0)"
 #define COLOR_LightBrown "(0.6,0.48,0.3,1.0)"
 
@@ -20,42 +20,78 @@ int flipflopcount=0;
 int TileCountOnRaw{0};
 float BuildingX{ -1 };
 float BuildingY{ -1 };
-int StartingIndex{0};
+int StartingIndex=0;
 const float Quarter= 0.25;
-struct tile {
+unsigned int* BoardInd=new unsigned int[384];
 
-    float LowerTriangle[6];
+struct Line {
 
-    float UpperTriangle[6];
+	float posInLine[18];
+
+	
 
 };
 
-void AssignPosToTile(float InitialX, float InitialY, tile* Tile)
+void AssignPosInLine(float InitialX, float InitialY, Line* line)
 {
-    Tile->LowerTriangle[0] = InitialX;
-    Tile->LowerTriangle[1] = InitialY;
-    Tile->LowerTriangle[2] = InitialX + Quarter;
-    Tile->LowerTriangle[3] = InitialY;
-    Tile->LowerTriangle[4] = InitialX;
-    Tile->LowerTriangle[5] = InitialY + Quarter;
-    Tile->UpperTriangle[0] = InitialX + Quarter;
-    Tile->UpperTriangle[1] = InitialY + Quarter;
-    Tile->UpperTriangle[2] = InitialX + Quarter;
-    Tile->UpperTriangle[3] = InitialY;
-    Tile->UpperTriangle[4] = InitialX;
-    Tile->UpperTriangle[5] = InitialY + Quarter;
+    for (int i = 0;i < 18;i++)
+    {
+        if (i % 2)
+            line->posInLine[i] = InitialY;
+        else
+			line->posInLine[i] = InitialX + (Quarter * (i / 2));
 
-    //Start Assigning by the bottom left corner of the rectangle,then bottom right,then top left,then top right, then bottom right, then top left
+    }
+
+    
 }
 
-inline void ChargeBuffer(unsigned int& buffer,tile* Board)
+void AssignIndexToTile(unsigned int InitialIndex,unsigned int* Data,unsigned int& DataIndex)
+{
+
+    for (int i = 1;i < 9;i++)
+    {
+       Data[DataIndex]   = InitialIndex + i - 1;
+       Data[DataIndex+1] = InitialIndex + i;
+       Data[DataIndex+2] = InitialIndex +i+9;
+       Data[DataIndex+3] = InitialIndex +i+9;
+       Data[DataIndex+4] = InitialIndex+ i+9 - 1;
+       Data[DataIndex+5] = InitialIndex+i-1;
+
+        DataIndex += 6;
+       
+
+    }
+
+
+}
+
+//unsigned int indices[] =
+//{
+//    0,1,10,
+//    10,9,0,
+//    70,71,80,
+//    80,79,70,
+//    15,16,25,
+//    25,24,15
+//};
+
+inline void ChargeVertexBuffer(unsigned int& buffer,Line* Board)
 {
 
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
-    glBufferData(GL_ARRAY_BUFFER, 64 * sizeof(tile),Board,GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(Line),Board,GL_STATIC_DRAW);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), nullptr);
    
+}
+
+inline void ChargeIndexBuffer(unsigned int& ibo, unsigned int* Data)
+{
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 384 * (sizeof(unsigned int)), Data, GL_STATIC_DRAW);
+
 }
 
 
@@ -153,27 +189,31 @@ int main(void)
         std::cout << glGetString(GL_VERSION) << std::endl;
     }
 
-    tile Board[64];
+    Line Board[9];
     
-    for(tile& T:Board)
+    for (Line& L : Board)
     {
-        
-        AssignPosToTile(BuildingX, BuildingY, &T);
-        BuildingX += Quarter;
-        TileCountOnRaw++;
-        if (TileCountOnRaw ==8) 
-        {
-            TileCountOnRaw = 0;
-            BuildingX = -1;
-            BuildingY += Quarter;
-        }
-            
+
+        AssignPosInLine(BuildingX, BuildingY, &L);
+        BuildingY += Quarter;
 
     }
 
-    unsigned int buffer1;
-    glGenBuffers(1, &buffer1);
-        ChargeBuffer(buffer1,Board);
+    unsigned int DataIndex=0;
+
+    for (int i = 0;i < 8; i++)
+    {
+        AssignIndexToTile(i * 9, BoardInd, DataIndex);
+  
+
+    }
+
+    unsigned int vbo;
+    glGenBuffers(1, &vbo);
+    ChargeVertexBuffer(vbo,Board);
+    unsigned int ibo;
+    ChargeIndexBuffer(ibo, BoardInd);
+    delete[] BoardInd;
 
 
         std::string VertexShader =
@@ -255,25 +295,27 @@ int main(void)
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
 
-        for (int i = 0;i < 64;i++)
-        {
-            if(black)
-                SetInitialRawShader(BlackShader, WhiteShader, flipflopcount);
-            else
-                SetInitialRawShader(WhiteShader, BlackShader, flipflopcount);
-            if(flipflopcount==8)
-            {
-                flipflopcount = 0;
-                black = !black;
-            }
+        
+		for (int i = 0;i < 64;i++)
+		{
+			if (black)
+				SetInitialRawShader(BlackShader, WhiteShader, flipflopcount);
+			else
+				SetInitialRawShader(WhiteShader, BlackShader, flipflopcount);
+			if (flipflopcount == 8)
+			{
+				flipflopcount = 0;
+				black = !black;
+			}
 
-            
 
-            glDrawArrays(GL_TRIANGLES, StartingIndex, 6);
-            StartingIndex += 6;
 
-        }
-        StartingIndex = 0;
+			glDrawElements(GL_TRIANGLES, 9 , GL_UNSIGNED_INT,(const void*) StartingIndex);
+            StartingIndex += 24;
+
+		}
+		StartingIndex = 0;
+        //glDrawElements(GL_TRIANGLES, 18, GL_UNSIGNED_INT, nullptr);
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
