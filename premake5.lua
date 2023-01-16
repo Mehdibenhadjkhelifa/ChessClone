@@ -31,7 +31,7 @@ project "ChessClone"
 
 	libdirs
 	{
-		"Depedencies/GLEW/lib/Release/Win32",
+		"Depedencies/GLEW/Librairies/Release/Win32",
 		"Depedencies/GLFW/lib-vc2022"
 	}
 
