@@ -435,3 +435,8 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+#Premake Files to not ignore
+!vendor/premake/*
+
+
