@@ -13,8 +13,6 @@
 //#include "Rook.cpp"
 #define Width 640
 #define Height 640
-#define COLOR_DarkBrown "(0.28,0.12,0.0,1.0)"
-#define COLOR_LightBrown "(0.6,0.48,0.3,1.0)"
 
 class Rook;
 Board ChessBoard;
