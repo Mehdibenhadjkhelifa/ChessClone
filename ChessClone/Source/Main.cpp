@@ -1,11 +1,15 @@
 
 
 #include <iostream>
+#include <tuple>
+#include <sstream>
+#include <fstream>
 #include <glew.h>
 #include <glfw3.h>
 #include "Piece.h"
 #include "Rook.h"
 #include "Bishop.h"
+
 //#include "Rook.cpp"
 #define Width 640
 #define Height 640
@@ -59,22 +63,52 @@ void AssignIndexToTile(unsigned int InitialIndex,unsigned int* Data,unsigned int
        Data[DataIndex+5] = InitialIndex+i-1;
 
         DataIndex += 6;
-       
-
     }
 
 
 }
 
-//unsigned int indices[] =
-//{
-//    0,1,10,
-//    10,9,0,
-//    70,71,80,
-//    80,79,70,
-//    15,16,25,
-//    25,24,15
-//};
+
+
+static const std::tuple<std::string, std::string, std::string> ParseShader(const std::string& filePath)
+{
+    std::ifstream stream(filePath);
+    std::stringstream ss[3];
+    std::string line;
+
+    enum class ShaderTYPE
+    {
+        NONE = -1,
+        VERTEX = 0,
+        WHITEFRAGMENT = 1,
+        BLACKFRAGMENT = 2
+    };
+
+    ShaderTYPE type=ShaderTYPE::NONE;
+
+    while (getline(stream, line))
+    {
+        if (line.find("#shader") != std::string::npos) 
+        {
+            if (line.find("vertex") != std::string::npos)
+                type = ShaderTYPE::VERTEX;
+            else if (line.find("whiteFragment") != std::string::npos)
+                type = ShaderTYPE::WHITEFRAGMENT;
+            else if (line.find("blackFragment") != std::string::npos)
+                type = ShaderTYPE::BLACKFRAGMENT;
+
+        }
+        else
+        {
+            ss[(int)type] << line << "\n";
+        }
+    }
+
+    return std::make_tuple(ss[0].str(), ss[1].str(), ss[2].str());
+}
+
+
+
 
 inline void ChargeVertexBuffer(unsigned int& buffer,Line* Board)
 {
@@ -216,36 +250,12 @@ int main(void)
     delete[] BoardInd;
 
 
-        std::string VertexShader =
-            "#version 330 core\n"
-            "\n"
-            "layout(location=0) in vec4 position;\n"
-            "\n"
-            "void main(){\n"
-            "gl_Position=position;\n"
-            "}\n";
+     
 
-        std::string BlackFragmentShader =
-            "#version 330 core\n"
-            "\n"
-            "layout(location=0) out vec4 color;\n"
-            "\n"
-            "void main(){\n"
-            "\n"
-            "color = vec4" COLOR_DarkBrown ";\n"
-            "}\n";
-        std::string WhiteFragmentShader =
-            "#version 330 core\n"
-            "\n"
-            "layout(location=0) out vec4 color;\n"
-            "\n"
-            "void main(){\n"
-            "\n"
-            "color = vec4" COLOR_LightBrown ";\n"
-            "}\n";
+        const auto& [vs, wfs, bfs] = ParseShader("res/shaders/Basic.shader");
 
-        unsigned int BlackShader = CreateShader(VertexShader,BlackFragmentShader);
-        unsigned int WhiteShader = CreateShader(VertexShader, WhiteFragmentShader);
+        unsigned int WhiteShader = CreateShader(vs, wfs);
+        unsigned int BlackShader = CreateShader(vs, bfs);
 
 
 
