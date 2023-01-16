@@ -11,7 +11,7 @@ Creating a desktop application (Chess Clone) using opengl and C++
 
   -Open cmd in the cloned directory.
 
-  -run this following command : `vendor\bin\premake\premake.exe Target`  with Target being the IDE to build for or the running system(windows/linux/ect...)
+  -run this following command : `vendor\premake\premake.exe Target`  with Target being the IDE to build for or the running system(windows/linux/ect...)
 
   Example : Replace Target with vs2022 for to setup for visual studio 2022
 
