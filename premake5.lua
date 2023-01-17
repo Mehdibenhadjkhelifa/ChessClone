@@ -45,9 +45,10 @@ project "ChessClone"
 		{
 			"GLEW_STATIC" 
 		}
-
+	
 	filter "configurations:Debug"
 		symbols "On"
 	filter "configurations:Release"
 		optimize "On"
+
 

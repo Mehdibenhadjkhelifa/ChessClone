@@ -4,6 +4,7 @@
 #include <tuple>
 #include <sstream>
 #include <fstream>
+#include <filesystem>
 #include <glew.h>
 #include <glfw3.h>
 #include "Piece.h"
@@ -67,12 +68,32 @@ void AssignIndexToTile(unsigned int InitialIndex,unsigned int* Data,unsigned int
 }
 
 
+/// 
+/// This is a function to resolve the Paths issue that occurs
+/// when one tries to specify a path from the project directory 
+/// 
+/// \returns relative Path to the specified path wether no matter the working directory (project or output)
+/// 
+std::filesystem::path GetFilePath(const std::filesystem::path& TargetPath)
+{
+    
+    if (std::filesystem::relative(TargetPath) != "") // meaning we are in the working directory of the project
+        return TargetPath;
+    else
+        return std::filesystem::path("../../../ChessClone/" + TargetPath.generic_string());
 
-static const std::tuple<std::string, std::string, std::string> ParseShader(const std::string& filePath)
+}
+
+
+
+static const std::tuple<std::string, std::string, std::string> ParseShader(const std::filesystem::path& filePath)
 {
     std::ifstream stream(filePath);
     std::stringstream ss[3];
     std::string line;
+
+    if (!stream)
+        std::cout << "Error: Wrong filePath" << std::endl;
 
     enum class ShaderTYPE
     {
@@ -247,11 +268,8 @@ int main(void)
     ChargeIndexBuffer(ibo, BoardInd);
     delete[] BoardInd;
 
-
-     
-
-        const auto& [vs, wfs, bfs] = ParseShader("res/shaders/Basic.shader");
-
+  
+        const auto& [vs, wfs, bfs] = ParseShader(GetFilePath("res/shaders/Basic.shader"));
         unsigned int WhiteShader = CreateShader(vs, wfs);
         unsigned int BlackShader = CreateShader(vs, bfs);
 
@@ -259,7 +277,7 @@ int main(void)
 
 
 
-
+        
 
         /*std::cout << (int)&((Piece*)0)->PiecePosY << std::endl;*/
         /*std::cout << sizeof(bool) << std::endl;*/
