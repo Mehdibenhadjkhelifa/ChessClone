@@ -5,6 +5,7 @@
 #include <glfw3.h>
 
 //chess logic headers
+#include "ChessCore.h"
 #include "Piece.h"
 #include "Rook.h"
 #include "Bishop.h"
@@ -21,11 +22,9 @@ Board ChessBoard;
 
 namespace Chess {
 
-
-
-
 	void Run() 
 	{
+        //Using RAII to init the GLFWwindow
         bool InitSuccess=true;
         Renderer renderer(InitSuccess);
 
@@ -89,7 +88,7 @@ namespace Chess {
 
 
         /* Loop until the user closes the window */
-        while (!glfwWindowShouldClose(renderer.Window))
+        while (!glfwWindowShouldClose(renderer.GetWindow()))
         {
             renderer.RenderFrame(BlackShader, WhiteShader);
 

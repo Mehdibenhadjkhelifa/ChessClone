@@ -1,21 +1,23 @@
 #pragma once
-#include "ChessCore.h"
-#include "Board.h"
-
 
 class Piece {
-private:
-
-protected:
-	void PieceInit();
 public:
 	int PiecePosX;
 	int PiecePosY;
 	bool Color;
+private:
 
-	/*virtual void Move() = 0;*/
+
+protected:
+
+	void PieceInit();
+public:
+
 	Piece();
-	/*Piece(int PosX, int PosY, bool color);*/
+
+	//virtual void Move() = 0;
+
+	//Piece(int PosX, int PosY, bool color);
 
 
 };

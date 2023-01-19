@@ -1,4 +1,4 @@
-#include "Piece.h"
+#include "ChessCore.h"
 #include "Rook.h"
 #include <iostream>
 
@@ -78,14 +78,7 @@ extern Board ChessBoard;
 			/*ChessBoard.board[DownOffset][j].PiecesVisionList.emplace_back(*this);*/
 			DownOffset--;
 
-		}
-
-		
-
-
-
-
-			
+		}	
 	}
 
 

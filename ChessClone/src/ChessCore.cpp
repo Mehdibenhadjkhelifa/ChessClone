@@ -1,5 +1,5 @@
-#include "Board.h"
 #include "ChessCore.h"
+
 Board::Board() {
 
 	for (int i = 0;i < RankLength;i++)
@@ -12,7 +12,7 @@ Board::Board() {
 			board[i][j].tileState = TileNotTakenAndNotInPieceVision;
 			/*board[i][j].PiecesVisionList.reserve(6);*/
 
-     	}
+		}
 	}
 
 
@@ -21,6 +21,6 @@ Board::Board() {
 void Board::BoardInit()
 {
 
-	
+
 
 }

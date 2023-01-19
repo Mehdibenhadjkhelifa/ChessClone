@@ -1,5 +1,6 @@
-#include "Piece.h"
+#include "ChessCore.h"
 #include "Bishop.h"
+#include <iostream>
 extern Board ChessBoard;
 
 
@@ -8,6 +9,7 @@ extern Board ChessBoard;
 		PiecePosX = PosX;
 		PiecePosY = PosY;
 		Color = color;
+
 
 		int i(PiecePosX), j(PiecePosY);
 
@@ -105,5 +107,11 @@ extern Board ChessBoard;
 
 
 	}
+
+	/*void Bishop::Move()
+	{
+		std::cout << " This is from Move" << std::endl;
+
+	}*/
 
 

@@ -2,7 +2,6 @@
 #include <glfw3.h>
 #include <iostream>
 
-
 #include "Renderer.h"
 
 #define Width 640
@@ -10,18 +9,17 @@
 
 
 Renderer::Renderer(bool InitSuccess)
-    :Window(nullptr)
 {
     /* Initialize the library */
     if (!glfwInit()) 
     {
-        Window = false;
+        m_window = false;
         return;
     }
 
     /* Create a windowed mode window and its OpenGL context */
-    Window = glfwCreateWindow(Width, Height, "Chess Clone", NULL, NULL);
-    if (!Window)
+    m_window = glfwCreateWindow(Width, Height, "Chess Clone", NULL, NULL);
+    if (!m_window)
     {
         glfwTerminate();
         InitSuccess = false;
@@ -29,7 +27,7 @@ Renderer::Renderer(bool InitSuccess)
     }
 
     /* Make the window's context current */
-    glfwMakeContextCurrent(Window);
+    glfwMakeContextCurrent(m_window);
 
     if (glewInit() == GLEW_OK)
     {
@@ -147,7 +145,7 @@ void Renderer::RenderFrame(const unsigned int& BlackShader,const unsigned int& W
     m_StartingIndex = 0;
 
     /* Swap front and back buffers */
-    glfwSwapBuffers(Window);
+    glfwSwapBuffers(m_window);
 
 
 }

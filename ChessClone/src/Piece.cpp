@@ -10,8 +10,9 @@ Piece::Piece()
 
 	//std::cout << "TEsting from piece" << std::endl;
 }
-
+//
 //Piece::Piece(int PosX, int PosY, bool color) 
+//	:PiecePosX(PosX),PiecePosY(PosY),Color(color)
 //{	
 //	std::cout << "TEsting Here" << std::endl;
 //
@@ -24,7 +25,7 @@ void Piece::PieceInit()
 	else
 		ChessBoard.board[PiecePosX][PiecePosY].tileState = TileTaken;
 
-
+	//Move();
 
 }
 

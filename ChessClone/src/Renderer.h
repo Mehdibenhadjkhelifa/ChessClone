@@ -5,13 +5,14 @@
 class Renderer
 {
 private:
+	GLFWwindow* m_window=nullptr;
 	bool m_black = true;
 	int m_flipflopcount = 0;
 	int m_StartingIndex = 0;
 public:
 
-	GLFWwindow* Window;
 	Renderer(bool InitSuccess);
+	GLFWwindow* GetWindow() { return m_window; }
 
 	
 	void ChargeVertexBuffer(unsigned int& vbo, const void* Data, uint32_t Size);
