@@ -15,10 +15,10 @@ private:
 
 protected:
 
-	void PieceInit();
-	virtual void CalculatePossibleMoves();
 	void ClearPreviousPossibleMoves();//this isn't optimised for each piece, maybe something for later
 public:
+	void PieceInit();
+	virtual void CalculatePossibleMoves();
 
 	Piece();
 	virtual std::string GetName() { return "nothing"; };

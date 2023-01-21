@@ -12,6 +12,7 @@ private:
 public:
 
 	Renderer(bool InitSuccess);
+	~Renderer();
 	GLFWwindow* GetWindow() { return m_window; }
 
 	

@@ -35,6 +35,12 @@ Renderer::Renderer(bool InitSuccess)
     }
 
 }
+Renderer::~Renderer()
+{
+
+    
+}
+
 void Renderer::ChargeVertexBuffer(unsigned int& vbo, const void* Data, uint32_t Size)
 {
 

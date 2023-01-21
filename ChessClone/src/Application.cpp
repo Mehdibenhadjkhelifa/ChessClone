@@ -9,7 +9,7 @@
 #include "Piece.h"
 #include "Rook.h"
 #include "Bishop.h"
-
+#include "Queen.h"
 
 //render logic headers
 #include "Renderer.h"
@@ -71,7 +71,7 @@ namespace Chess {
 
         ChessBoard.board[0][0].PieceInTile = new Bishop(0, 0, Black);
 
-        ChessBoard.board[4][4].PieceInTile = new Bishop(4, 4, Black);
+        ChessBoard.board[4][4].PieceInTile = new Queen(4, 4, Black);
 
         ChessBoard.board[7][7].PieceInTile = new Bishop(7, 7, Black);
 
@@ -98,8 +98,8 @@ namespace Chess {
             for (unsigned int j = 0;j < ChessBoard.board[5][3].PiecesVisionList.size();j++)
             std::cout << ChessBoard.board[5][3].PiecesVisionList[j] << std::endl;
             std::cout << "==========================" << '\n';
-            for (unsigned int j = 0;j < ChessBoard.board[7][3].PiecesVisionList.size();j++)
-            std::cout << ChessBoard.board[7][3].PiecesVisionList[j] << std::endl;
+            for (unsigned int j = 0;j < ChessBoard.board[7][4].PiecesVisionList.size();j++)
+            std::cout << ChessBoard.board[7][4].PiecesVisionList[j] << std::endl;
             std::cout << "==========================" << '\n';
         
       
