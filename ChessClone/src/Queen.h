@@ -1,4 +1,4 @@
-
+#pragma once
 #include "Bishop.h"
 #include "Rook.h"
 
@@ -12,5 +12,5 @@ protected:
 	//couldn't do it via inheritance
 public:
 	Queen(int PosX,int PosY,bool color);
-	virtual std::string GetName() { return "Queen"; };
+	virtual std::string GetName()override { return "Queen"; };
 };

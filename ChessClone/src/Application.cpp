@@ -10,6 +10,7 @@
 #include "Rook.h"
 #include "Bishop.h"
 #include "Queen.h"
+#include "Knight.h"
 
 //render logic headers
 #include "Renderer.h"
@@ -69,39 +70,55 @@ namespace Chess {
 
 
 
-        ChessBoard.board[0][0].PieceInTile = new Bishop(0, 0, Black);
+        //ChessBoard.board[0][0].PieceInTile = new Bishop(0, 0, Black);
+        //ChessBoard.board[4][4].PieceInTile = new Queen(4, 4, Black);
+        //ChessBoard.board[7][7].PieceInTile = new Bishop(7, 7, Black);
+        //ChessBoard.board[7][1].PieceInTile = new Bishop(7, 1, Black);
+        //ChessBoard.board[7][2].PieceInTile = new Rook(7, 2, White);
+        //ChessBoard.board[7][0].PieceInTile = new Rook(7, 0, Black);
+            //for(unsigned int j=0;j< ChessBoard.board[0][0].PiecesVisionList.size();j++)
+            //std::cout << ChessBoard.board[0][0].PiecesVisionList[j] << std::endl;
+            //std::cout << "==========================" << '\n';
+            //for (unsigned int j = 0;j < ChessBoard.board[4][4].PiecesVisionList.size();j++)
+            //std::cout << ChessBoard.board[4][4].PiecesVisionList[j] << std::endl;
+            //std::cout << "==========================" << '\n';
+            //for (unsigned int j = 0;j < ChessBoard.board[7][7].PiecesVisionList.size();j++)
+            //std::cout << ChessBoard.board[7][7].PiecesVisionList[j] << std::endl;
+            //std::cout << "==========================" << '\n';
+            //for (unsigned int j = 0;j < ChessBoard.board[7][1].PiecesVisionList.size();j++)
+            //std::cout << ChessBoard.board[7][1].PiecesVisionList[j] << std::endl;
+            //std::cout << "==========================" << '\n';
+            //for (unsigned int j = 0;j < ChessBoard.board[5][3].PiecesVisionList.size();j++)
+            //std::cout << ChessBoard.board[5][3].PiecesVisionList[j] << std::endl;
+            //std::cout << "==========================" << '\n';
+            //for (unsigned int j = 0;j < ChessBoard.board[7][4].PiecesVisionList.size();j++)
+            //std::cout << ChessBoard.board[7][4].PiecesVisionList[j] << std::endl;
+            //std::cout << "==========================" << '\n';
 
-        ChessBoard.board[4][4].PieceInTile = new Queen(4, 4, Black);
-
-        ChessBoard.board[7][7].PieceInTile = new Bishop(7, 7, Black);
-
-        ChessBoard.board[7][1].PieceInTile = new Bishop(7, 1, Black);
-
-        ChessBoard.board[7][2].PieceInTile = new Rook(7, 2, White);
-
-        ChessBoard.board[7][0].PieceInTile = new Rook(7, 0, Black);
 
 
-            for(unsigned int j=0;j< ChessBoard.board[0][0].PiecesVisionList.size();j++)
+        ChessBoard.board[0][0].PieceInTile = new Knight(0, 0, Black);
+
+        ChessBoard.board[4][4].PieceInTile = new Knight(3, 3, Black);
+
+        ChessBoard.board[2][1].PieceInTile = new Queen(2, 1, Black);
+
+        ChessBoard.board[0][3].PieceInTile = new Queen(0, 3, Black);
+
+        ChessBoard.board[7][1].PieceInTile = new Rook(4, 1, Black);
+
+        for (unsigned int j = 0;j < ChessBoard.board[0][0].PiecesVisionList.size();j++)
             std::cout << ChessBoard.board[0][0].PiecesVisionList[j] << std::endl;
-
-            std::cout << "==========================" << '\n';
-            for (unsigned int j = 0;j < ChessBoard.board[4][4].PiecesVisionList.size();j++)
-            std::cout << ChessBoard.board[4][4].PiecesVisionList[j] << std::endl;
-            std::cout << "==========================" << '\n';
-            for (unsigned int j = 0;j < ChessBoard.board[7][7].PiecesVisionList.size();j++)
-            std::cout << ChessBoard.board[7][7].PiecesVisionList[j] << std::endl;
-            std::cout << "==========================" << '\n';
-            for (unsigned int j = 0;j < ChessBoard.board[7][1].PiecesVisionList.size();j++)
+        std::cout << "==========================" << '\n';
+        for (unsigned int j = 0;j < ChessBoard.board[0][3].PiecesVisionList.size();j++)
+            std::cout << ChessBoard.board[0][3].PiecesVisionList[j] << std::endl;
+        std::cout << "==========================" << '\n';
+        for (unsigned int j = 0;j < ChessBoard.board[2][1].PiecesVisionList.size();j++)
+            std::cout << ChessBoard.board[2][1].PiecesVisionList[j] << std::endl;
+        std::cout << "==========================" << '\n';
+        for (unsigned int j = 0;j < ChessBoard.board[7][1].PiecesVisionList.size();j++)
             std::cout << ChessBoard.board[7][1].PiecesVisionList[j] << std::endl;
-            std::cout << "==========================" << '\n';
-            for (unsigned int j = 0;j < ChessBoard.board[5][3].PiecesVisionList.size();j++)
-            std::cout << ChessBoard.board[5][3].PiecesVisionList[j] << std::endl;
-            std::cout << "==========================" << '\n';
-            for (unsigned int j = 0;j < ChessBoard.board[7][4].PiecesVisionList.size();j++)
-            std::cout << ChessBoard.board[7][4].PiecesVisionList[j] << std::endl;
-            std::cout << "==========================" << '\n';
-        
+        std::cout << "==========================" << '\n';
       
 
 
