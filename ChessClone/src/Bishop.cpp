@@ -1,6 +1,7 @@
 #include "ChessCore.h"
 #include "Bishop.h"
 #include <iostream>
+#include <algorithm>
 extern Board ChessBoard;
 
 
@@ -10,50 +11,70 @@ extern Board ChessBoard;
 		PiecePosY = PosY;
 		Color = color;
 
+		PieceInit();
+		CalculatePossibleMoves();
+		
+	}
 
+	void Bishop::CalculatePossibleMoves()
+	{
+		ClearPreviousPossibleMoves();
 		int i(PiecePosX), j(PiecePosY);
 
-		PieceInit();
 		//Top Right Seach 
-		while (i + 1 < FileLength && j + 1 < RankLength) 
+		while (i + 1 < FileLength && j + 1 < RankLength)
 		{
-			if(ChessBoard.board[i+1][j+1].tileState== TileTaken || ChessBoard.board[i+1][j+1].tileState == TileTakenAndInPieceVision)
+			//check if tile has  this piece in it's pieces vision list
+			auto It = std::find(ChessBoard.board[i + 1][j + 1].PiecesVisionList.begin(), ChessBoard.board[i + 1][j + 1].PiecesVisionList.end(),this);
+			if (It != std::end(ChessBoard.board[i + 1][j + 1].PiecesVisionList))
 			{
-				ChessBoard.board[i + 1][j + 1].tileState = TileTakenAndInPieceVision;
+				if (ChessBoard.board[i + 1][j + 1].PieceInTile)
+					break;
+				else
+				{
+					i++;
+					j++;
+					continue;
+				}
+			}
+
+
+			ChessBoard.board[i + 1][j + 1].PiecesVisionList.emplace_back(this);
+			if (ChessBoard.board[i + 1][j + 1].PieceInTile)
 				break;
 			
-			}
-			else
-			{
-				ChessBoard.board[i + 1][j + 1].tileState = TileInPieceVision;
-				i++;
-				j++;
-
-			}
-
+			i++;
+			j++;
 
 		}
 		i = PiecePosX;
 		j = PiecePosY;
 		// Resetting i & j
-		// Searching Top Left
-
 		
+		// Searching Top Left
 		while (i + 1 < FileLength && j - 1 > -1)
 		{
-			if (ChessBoard.board[i + 1][j -1].tileState == TileTaken || ChessBoard.board[i + 1][j - 1].tileState == TileTakenAndInPieceVision)
+			//check if tile has  this piece in it's pieces vision list
+			auto It = std::find(ChessBoard.board[i + 1][j - 1].PiecesVisionList.begin(), ChessBoard.board[i + 1][j - 1].PiecesVisionList.end(), this);
+			if (It != std::end(ChessBoard.board[i + 1][j - 1].PiecesVisionList))
 			{
-				ChessBoard.board[i + 1][j -1].tileState = TileTakenAndInPieceVision;
+				if (ChessBoard.board[i + 1][j - 1].PieceInTile)
+					break;
+				else
+				{
+					i++;
+					j--;
+					continue;
+				}
+			}
+
+			ChessBoard.board[i + 1][j - 1].PiecesVisionList.emplace_back(this);
+
+			if (ChessBoard.board[i + 1][j - 1].PieceInTile)
 				break;
 
-			}
-			else
-			{
-				ChessBoard.board[i + 1][j -1].tileState = TileInPieceVision;
-				i++;
-				j--;
-
-			}
+			i++;
+			j--;
 
 		}
 
@@ -63,22 +84,29 @@ extern Board ChessBoard;
 		// searching Bottom Right
 
 
-		while (i -1 > -1 && j + 1 < RankLength)
+		while (i - 1 > -1 && j + 1 < RankLength)
 		{
-			if (ChessBoard.board[i - 1][j + 1].tileState == TileTaken || ChessBoard.board[i -1][j + 1].tileState == TileTakenAndInPieceVision)
+			//check if tile has  this piece in it's pieces vision list
+			auto It = std::find(ChessBoard.board[i - 1][j + 1].PiecesVisionList.begin(), ChessBoard.board[i - 1][j + 1].PiecesVisionList.end(), this);
+			if (It != std::end(ChessBoard.board[i - 1][j + 1].PiecesVisionList))
 			{
-				ChessBoard.board[i - 1][j + 1].tileState = TileTakenAndInPieceVision;
+				if (ChessBoard.board[i - 1][j + 1].PieceInTile)
+					break;
+				else
+				{
+					i--;
+					j++;
+					continue;
+				}
+			}
+
+
+			ChessBoard.board[i - 1][j + 1].PiecesVisionList.emplace_back(this);
+
+			if (ChessBoard.board[i - 1][j + 1].PieceInTile)
 				break;
-
-			}
-			else
-			{
-				ChessBoard.board[i - 1][j + 1].tileState = TileInPieceVision;
-				i--;
-				j++;
-
-			}
-
+			i--;
+			j++;
 
 		}
 
@@ -89,29 +117,30 @@ extern Board ChessBoard;
 
 		while (i - 1 > -1 && j - 1 > -1)
 		{
-			if (ChessBoard.board[i - 1][j - 1].tileState == TileTaken || ChessBoard.board[i - 1][j - 1].tileState == TileTakenAndInPieceVision)
+			//check if tile has  this piece in it's pieces vision list
+			auto It = std::find(ChessBoard.board[i - 1][j - 1].PiecesVisionList.begin(), ChessBoard.board[i - 1][j - 1].PiecesVisionList.end(), this);
+			if (It != std::end(ChessBoard.board[i - 1][j - 1].PiecesVisionList))
 			{
-				ChessBoard.board[i - 1][j - 1].tileState = TileTakenAndInPieceVision;
+				if (ChessBoard.board[i - 1][j - 1].PieceInTile)
+					break;
+				else
+				{
+					i--;
+					j--;
+					continue;
+				}
+			}
+
+
+			ChessBoard.board[i - 1][j - 1].PiecesVisionList.emplace_back(this);
+			if (ChessBoard.board[i - 1][j - 1].PieceInTile)
 				break;
 
-			}
-			else
-			{
-				ChessBoard.board[i - 1][j - 1].tileState = TileInPieceVision;
-				i--;
-				j--;
-
-			}
+			i--;
+			j--;
 
 		}
 
-
 	}
-
-	/*void Bishop::Move()
-	{
-		std::cout << " This is from Move" << std::endl;
-
-	}*/
 
 

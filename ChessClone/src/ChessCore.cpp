@@ -9,8 +9,7 @@ Board::Board() {
 			board[i][j].TileRaw = i;
 			board[i][j].TileColumn = j;
 			board[i][j].PieceInTile = nullptr;
-			board[i][j].tileState = TileNotTakenAndNotInPieceVision;
-			/*board[i][j].PiecesVisionList.reserve(6);*/
+			board[i][j].PiecesVisionList.reserve(6);
 
 		}
 	}

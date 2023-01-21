@@ -16,7 +16,12 @@
 #include "RendererData.h"
 #include "Application.h"
 
+std::ostream& operator<<(std::ostream& stream, Piece* piece)
+{
+    stream << piece->GetName() << " : " << piece->PiecePosX << " , " << piece->PiecePosY << "  Color : " << ( piece->Color ? "White" : "Black");
+    return stream;
 
+}
 Board ChessBoard;
 
 
@@ -72,18 +77,32 @@ namespace Chess {
 
         ChessBoard.board[7][1].PieceInTile = new Bishop(7, 1, Black);
 
+        ChessBoard.board[7][2].PieceInTile = new Rook(7, 2, White);
 
-        std::cout << ChessBoard.board[0][0].tileState << std::endl;
+        ChessBoard.board[7][0].PieceInTile = new Rook(7, 0, Black);
 
-        std::cout << ChessBoard.board[4][4].tileState << std::endl;
 
-        std::cout << ChessBoard.board[7][7].tileState << std::endl;
+            for(unsigned int j=0;j< ChessBoard.board[0][0].PiecesVisionList.size();j++)
+            std::cout << ChessBoard.board[0][0].PiecesVisionList[j] << std::endl;
 
-        std::cout << ChessBoard.board[7][1].tileState << std::endl;
-
-        std::cout << ChessBoard.board[5][3].tileState << std::endl;
-
-        std::cout << ChessBoard.board[7][2].tileState << std::endl;
+            std::cout << "==========================" << '\n';
+            for (unsigned int j = 0;j < ChessBoard.board[4][4].PiecesVisionList.size();j++)
+            std::cout << ChessBoard.board[4][4].PiecesVisionList[j] << std::endl;
+            std::cout << "==========================" << '\n';
+            for (unsigned int j = 0;j < ChessBoard.board[7][7].PiecesVisionList.size();j++)
+            std::cout << ChessBoard.board[7][7].PiecesVisionList[j] << std::endl;
+            std::cout << "==========================" << '\n';
+            for (unsigned int j = 0;j < ChessBoard.board[7][1].PiecesVisionList.size();j++)
+            std::cout << ChessBoard.board[7][1].PiecesVisionList[j] << std::endl;
+            std::cout << "==========================" << '\n';
+            for (unsigned int j = 0;j < ChessBoard.board[5][3].PiecesVisionList.size();j++)
+            std::cout << ChessBoard.board[5][3].PiecesVisionList[j] << std::endl;
+            std::cout << "==========================" << '\n';
+            for (unsigned int j = 0;j < ChessBoard.board[7][3].PiecesVisionList.size();j++)
+            std::cout << ChessBoard.board[7][3].PiecesVisionList[j] << std::endl;
+            std::cout << "==========================" << '\n';
+        
+      
 
 
 
