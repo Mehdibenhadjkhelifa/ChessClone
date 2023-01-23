@@ -5,16 +5,11 @@
 extern Board ChessBoard;
 
 
-	Bishop::Bishop(int PosX,int PosY,bool color) 
-	{
-		PiecePosX = PosX;
-		PiecePosY = PosY;
-		Color = color;
-
-		PieceInit();
-		CalculatePossibleMoves();
-		
-	}
+Bishop::Bishop(int PosX, int PosY, bool color)
+	:Piece(PosX, PosY, color)
+{
+	CalculatePossibleMoves();
+}
 
 	void Bishop::CalculatePossibleMoves()
 	{

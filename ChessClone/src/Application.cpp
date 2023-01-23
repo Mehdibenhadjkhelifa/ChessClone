@@ -145,7 +145,7 @@ namespace Chess {
             std::cout << ChessBoard.board[2][4].PiecesVisionList[j] << std::endl;
         std::cout << "==========================" << '\n';*/
 
-
+        ChessBoard.board[4][2].PieceInTile = new Bishop(4, 2, Black);
 
 
         /* Loop until the user closes the window */

@@ -4,12 +4,9 @@
 extern Board ChessBoard;
 
 King::King(int PosX,int PosY,bool color)
+	:Piece(PosX, PosY, color)
 {
-	PiecePosX = PosX;
-	PiecePosY = PosY;
-	Color = color;
 
-	PieceInit();
 	CalculatePossibleMoves();
 
 }

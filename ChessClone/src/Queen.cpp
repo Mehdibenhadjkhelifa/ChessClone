@@ -5,16 +5,9 @@ extern Board ChessBoard;
 
 
 Queen::Queen(int PosX, int PosY, bool color)
+	:Piece(PosX, PosY, color)
 {
-	
-
-	PiecePosX = PosX;
-	PiecePosY = PosY;
-	Color = color;
-
-	PieceInit();
 	CalculatePossibleMoves();
-
 }
 
 void Queen::CalculatePossibleMoves()
