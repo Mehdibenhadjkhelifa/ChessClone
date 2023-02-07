@@ -144,7 +144,7 @@ void Renderer::RenderFrame(const unsigned int& BlackShader,const unsigned int& W
 
 
 
-        glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, (const void*)m_StartingIndex);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (const void*)m_StartingIndex);
         m_StartingIndex += 24;
 
     }

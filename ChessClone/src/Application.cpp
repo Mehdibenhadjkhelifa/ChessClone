@@ -88,7 +88,7 @@ namespace Chess {
             //std::cout << ChessBoard.board[7][4].PiecesVisionList[j] << std::endl;
             //std::cout << "==========================" << '\n';
 
-       /* Knight + Queen Test
+       /* Knight + Queen Test*/
         ChessBoard.board[0][0].PieceInTile = new Knight(0, 0, Black);
         ChessBoard.board[4][4].PieceInTile = new Knight(3, 3, Black);
         ChessBoard.board[2][1].PieceInTile = new Queen(2, 1, Black);
@@ -105,7 +105,7 @@ namespace Chess {
         std::cout << "==========================" << '\n';
         for (unsigned int j = 0;j < ChessBoard.board[7][1].PiecesVisionList.size();j++)
             std::cout << ChessBoard.board[7][1].PiecesVisionList[j] << std::endl;
-        std::cout << "==========================" << '\n';*/
+        std::cout << "==========================" << '\n';
 
        /*     King Test
         ChessBoard.board[4][2].PieceInTile = new King(4, 2, Black);
