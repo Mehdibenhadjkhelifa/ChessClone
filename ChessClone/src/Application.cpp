@@ -58,9 +58,9 @@ namespace Chess {
         delete[] BoardInd;
 
 
-        const auto& [vs, wfs, bfs] = RendererData::ParseShader(RendererData::GetFilePath("res/shaders/Basic.shader"));
-        unsigned int WhiteShader = renderer.CreateShader(vs, wfs);
-        unsigned int BlackShader = renderer.CreateShader(vs, bfs);
+        const auto& [vs,fs] = RendererData::ParseShader(RendererData::GetFilePath("res/shaders/Basic.shader"));
+        unsigned int Shader = renderer.CreateShader(vs, fs);
+        renderer.SetShader(Shader);
 
         //Bishop and rook tests
         //ChessBoard.board[0][0].PieceInTile = new Bishop(0, 0, Black);
@@ -147,11 +147,10 @@ namespace Chess {
 
         ChessBoard.board[4][2].PieceInTile = new Bishop(4, 2, Black);
 
-
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(renderer.GetWindow()))
         {
-            renderer.RenderFrame(BlackShader, WhiteShader);
+            renderer.RenderFrame();
 
             /* Poll for and process events */
             glfwPollEvents();

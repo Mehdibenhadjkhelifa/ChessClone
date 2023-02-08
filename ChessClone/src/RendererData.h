@@ -17,6 +17,6 @@ public:
 	static void BindData(Line* BoardData, unsigned int* DataIndex);
 
 
-	static const std::tuple<std::string, std::string, std::string> ParseShader(const std::filesystem::path& filePath);
+	static const std::tuple<std::string, std::string> ParseShader(const std::filesystem::path& filePath);
 	static std::filesystem::path GetFilePath(const std::filesystem::path& TargetPath);
 };

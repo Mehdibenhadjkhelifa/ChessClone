@@ -13,7 +13,7 @@ Renderer::Renderer(bool InitSuccess)
     /* Initialize the library */
     if (!glfwInit()) 
     {
-        m_window = false;
+        InitSuccess = false;
         return;
     }
 
@@ -57,6 +57,13 @@ void Renderer::ChargeIndexBuffer(unsigned int& ibo, const void* Data, uint32_t S
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, Size, Data, GL_STATIC_DRAW);
 
+}
+
+int Renderer::GetUniformLocation(const char* Uniform)
+{
+    int Location =glGetUniformLocation(m_Shader, "u_Color");
+    ASSERT(Location != -1);
+    return Location;
 }
 
 unsigned int Renderer::CompiledShader(unsigned int Type, std::string Source)
@@ -107,24 +114,47 @@ unsigned int Renderer::CreateShader(std::string VertexShader, std::string Fragme
 
 }
 
-
-void Renderer::SetInitialRawShader(const unsigned int& initialShader, const unsigned int& SecondShader, int& Count)
+void Renderer::SetShader(const unsigned int& shader)
 {
-
-    if (!(Count % 2))
-    {
-        glUseProgram(initialShader);
-    }
-    else
-    {
-        glUseProgram(SecondShader);
-    }
-
-    Count++;
+    m_Shader = shader;
+    glUseProgram(shader);
 
 }
 
-void Renderer::RenderFrame(const unsigned int& BlackShader,const unsigned int& WhiteShader)
+void Renderer::SetShaderUniform4f(const char* uniform,float x1,float x2,float x3,float x4)
+{
+    glUniform4f(GetUniformLocation(uniform),x1,x2,x3,x4);
+}
+
+
+void Renderer::SetAppropriateUniform()
+{
+    if (!(m_flipflopcount % 2))
+    {
+        if (m_black)
+            SetShaderUniform4f("u_Color", COLOR_DARKBROWN);
+        else
+            SetShaderUniform4f("u_Color", COLOR_LIGHTBROWN);
+    }
+    else
+    {
+        if (m_black)
+            SetShaderUniform4f("u_Color", COLOR_LIGHTBROWN);
+        else
+            SetShaderUniform4f("u_Color", COLOR_DARKBROWN);
+    }
+    m_flipflopcount++;
+    if (m_flipflopcount == 8)
+    {
+        m_flipflopcount = 0;
+        m_black = !m_black;
+    }
+}
+
+
+
+
+void Renderer::RenderFrame()
 {
     /* Render here */
     glClear(GL_COLOR_BUFFER_BIT);
@@ -132,21 +162,9 @@ void Renderer::RenderFrame(const unsigned int& BlackShader,const unsigned int& W
 
     for (int i = 0;i < 64;i++)
     {
-        if (m_black)
-            SetInitialRawShader(BlackShader, WhiteShader, m_flipflopcount);
-        else
-            SetInitialRawShader(WhiteShader, BlackShader, m_flipflopcount);
-        if (m_flipflopcount == 8)
-        {
-            m_flipflopcount = 0;
-            m_black = !m_black;
-        }
-
-
-
+        SetAppropriateUniform();
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (const void*)m_StartingIndex);
         m_StartingIndex += 24;
-
     }
     m_StartingIndex = 0;
 

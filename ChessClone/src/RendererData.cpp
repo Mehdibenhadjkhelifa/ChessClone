@@ -60,10 +60,10 @@ void RendererData::BindData(Line* BoardData, unsigned int* DataIndex)
 
 }
 
-const std::tuple<std::string, std::string, std::string> RendererData::ParseShader(const std::filesystem::path& filePath) 
+const std::tuple<std::string, std::string> RendererData::ParseShader(const std::filesystem::path& filePath) 
 {
     std::ifstream stream(filePath);
-    std::stringstream ss[3];
+    std::stringstream ss[2];
     std::string line;
 
     if (!stream)
@@ -73,8 +73,7 @@ const std::tuple<std::string, std::string, std::string> RendererData::ParseShade
     {
         NONE = -1,
         VERTEX = 0,
-        WHITEFRAGMENT = 1,
-        BLACKFRAGMENT = 2
+        FRAGMENT = 1
     };
 
     ShaderTYPE type = ShaderTYPE::NONE;
@@ -85,11 +84,8 @@ const std::tuple<std::string, std::string, std::string> RendererData::ParseShade
         {
             if (line.find("vertex") != std::string::npos)
                 type = ShaderTYPE::VERTEX;
-            else if (line.find("whiteFragment") != std::string::npos)
-                type = ShaderTYPE::WHITEFRAGMENT;
-            else if (line.find("blackFragment") != std::string::npos)
-                type = ShaderTYPE::BLACKFRAGMENT;
-
+            else if (line.find("Fragment") != std::string::npos)
+                type = ShaderTYPE::FRAGMENT;
         }
         else
         {
@@ -97,7 +93,7 @@ const std::tuple<std::string, std::string, std::string> RendererData::ParseShade
         }
     }
 
-    return std::make_tuple(ss[0].str(), ss[1].str(), ss[2].str());
+    return std::make_tuple(ss[0].str(), ss[1].str());
 
 }
 
