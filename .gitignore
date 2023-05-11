@@ -437,9 +437,11 @@ FodyWeavers.xsd
 *.sln.iml
 
 #Premake Files to not ignore
-!vendor/premake/*
+#!vendor/premake/*
 
 #GLEW files to not ignore
 !Depedencies/GLEW/Libraries/**
 
 build/
+vendor/
+.premake5

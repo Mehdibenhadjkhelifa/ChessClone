@@ -1,5 +1,5 @@
 #pragma once
-#include "piece.h"
+#include "Piece.h"
 #include<vector>
 #define Black 0
 #define White 1
