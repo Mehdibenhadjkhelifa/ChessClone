@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include "Renderer.h"
-
+#include "RendererData.h"
 #define Width 640
 #define Height 640
 
@@ -22,6 +22,11 @@ Renderer::Renderer(bool InitSuccess)
     if (!m_window)
     {
         glfwTerminate();
+        InitSuccess = false;
+        return;
+    }
+    if (!RendererData::SetWorkingDirectory())
+    {
         InitSuccess = false;
         return;
     }

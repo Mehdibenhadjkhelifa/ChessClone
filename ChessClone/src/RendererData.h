@@ -21,5 +21,5 @@ public:
 
 
 	static const std::tuple<std::string, std::string> ParseShader(const std::filesystem::path& filePath);
-	static std::filesystem::path GetFilePath(const std::filesystem::path& TargetPath);
+	static bool SetWorkingDirectory();
 };

@@ -58,7 +58,7 @@ namespace Chess {
         delete[] BoardInd;
 
 
-        const auto& [vs,fs] = RendererData::ParseShader(RendererData::GetFilePath("res/shaders/Basic.shader"));
+        const auto& [vs,fs] = RendererData::ParseShader("res/shaders/Basic.shader");
         unsigned int Shader = renderer.CreateShader(vs, fs);
         renderer.SetShader(Shader);
 

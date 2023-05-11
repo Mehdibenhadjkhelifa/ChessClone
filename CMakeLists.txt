@@ -36,7 +36,7 @@ file(GLOB SOURCES "ChessClone/src/*.cpp")
 file(GLOB HEADER_FILES "ChessClone/src/*.h")
 
 #set output directory for the binary
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin/${CMAKE_PROJECT_NAME}/${CMAKE_BUILD_TYPE})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin/${CMAKE_PROJECT_NAME}_proj/${CMAKE_BUILD_TYPE})
 
 #feed the project with source + header files
 add_executable(ChessClone ${SOURCES} ${HEADER_FILES})

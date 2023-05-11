@@ -97,18 +97,23 @@ const std::tuple<std::string, std::string> RendererData::ParseShader(const std::
 
 }
 
-/// 
-/// This is a function to resolve the Paths issue that occurs
-/// when one tries to specify a path from the project directory 
-/// 
-/// \returns relative Path to the specified path wether no matter the working directory (project or output)
-/// 
-std::filesystem::path RendererData::GetFilePath(const std::filesystem::path& TargetPath)
+//sets the working directory to ChessClone/ChessClone where the resources 'res' folder is
+bool RendererData::SetWorkingDirectory()
 {
-    if (std::filesystem::relative(TargetPath) != "") // meaning we are in the working directory of the project
-        return TargetPath;
-    else
-        return std::filesystem::path("../../../ChessClone/" + TargetPath.generic_string());
-
+    static bool AlreadyExecuted = false;
+    if (AlreadyExecuted)
+        return false;
+    std::filesystem::path target = "ChessClone";
+    std::filesystem::path temp = std::filesystem::current_path();
+    while (temp.filename() != target)
+    {
+        temp.remove_filename();
+        std::string temp2 = temp.string();
+        temp2.pop_back();
+        temp = std::filesystem::path(temp2);
+    }
+    std::filesystem::current_path(temp.string() + std::string("/ChessClone/"));
+    AlreadyExecuted = true;
+    return true;
 }
 
