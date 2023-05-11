@@ -443,5 +443,5 @@ FodyWeavers.xsd
 !Depedencies/GLEW/Libraries/**
 
 build/
-vendor/
-.premake5
+/vendor/
+premake5.lua
