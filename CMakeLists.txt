@@ -29,7 +29,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
-#add_definitions(-DGLEW_STATIC)
+add_definitions(-DGLEW_STATIC)
 
 #set source files and header files
 file(GLOB SOURCES "ChessClone/src/*.cpp")

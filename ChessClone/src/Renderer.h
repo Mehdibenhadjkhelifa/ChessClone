@@ -1,8 +1,13 @@
 #pragma once
 #include <string>
-#include <signal.h>
 
+#ifdef _WIN32
+#define ASSERT(x) if(!(x)) __debugbreak()
+#else
+#include <signal.h>
 #define ASSERT(x) if(!(x)) raise(SIGTRAP)
+#endif
+
 #define COLOR_DARKBROWN 0.28f,0.12f,0.0f,1.0f
 #define COLOR_LIGHTBROWN 0.6f,0.48f,0.3f,1.0f
 
