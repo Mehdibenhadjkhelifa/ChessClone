@@ -21,6 +21,7 @@ protected:
 public:
 
 	Piece();
+	virtual ~Piece() = default;
 	virtual std::string GetName() { return "nothing"; };
 	//virtual void Move() = 0;
 	Piece(int PosX, int PosY, bool color);
