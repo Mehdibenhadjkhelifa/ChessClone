@@ -16,8 +16,11 @@ Creating a desktop application (Chess Clone) using opengl and C++
   ~~Example : Replace Target with vs2022 to setup for visual studio 2022~~
 
   -make a build directory : `mkdir build`
+  
   -navigate to the build directory : `cd build`
+  
   -execute cmake in the build directory:`cmake ..`
+  
   NOTE:you should have cmake installed with a version of 3.5 or above
   
 
