@@ -444,6 +444,6 @@ FodyWeavers.xsd
 
 build/
 
-/vendor/
+vendor/
 
 *.lua
