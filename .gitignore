@@ -446,4 +446,8 @@ build/
 
 vendor/
 
+.vscode/
+
+*.sh
+
 *.lua
